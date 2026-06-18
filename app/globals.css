@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand green — PRIMARY. Replace with exact brand hex if known. */
+  --brand-900: #06301f; /* deepest — text on light tints */
+  --brand-700: #0b5c3b;
+  --brand-600: #0e7a4f; /* primary action / link */
+  --brand-500: #16a34a;
+  --brand-400: #34d27b; /* gradient light stop */
+  --brand-glow: #b9f4d0; /* ambient tint behind hero */
+
+  /* Brand gradient (hero card + closing CTA ONLY) */
+  --brand-grad: linear-gradient(135deg, #0e7a4f 0%, #16a34a 55%, #34d27b 100%);
+
+  /* Neutrals */
+  --ink: #0e1411; /* near-black, slight green cast */
+  --mid: #4a524e;
+  --muted: #8a908c;
+  --border: #e6e8e6;
+  --surface: #f8f8f6; /* off-white canvas */
+  --white: #ffffff;
+
+  /* Per-section accents — brand green only */
+  --acc-modules: #0e7a4f;
+  --acc-sitemap: #0e7a4f;
+  --acc-roadmap: #0e7a4f;
+  --acc-journey: #0e7a4f;
+  --acc-cases: #0e7a4f;
+
+  /* Module hues — green scale only */
+  --mod-ci: #0e7a4f;
+  --mod-rep: #16a34a;
+  --mod-ecom: #0b5c3b;
+  --mod-voice: #34d27b;
+
+  /* Signal colors — green scale only */
+  --up: #16a34a;
+  --down: #0b5c3b;
+  --warn: #34d27b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Shared soft-blur ambient glow behind the whole page (hero look, everywhere).
+   Fixed so the glow spans every section consistently. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 42rem at 8% 4%, rgba(185, 244, 208, 0.55), transparent 60%),
+    radial-gradient(52rem 40rem at 92% 16%, rgba(185, 244, 208, 0.42), transparent 58%),
+    radial-gradient(56rem 44rem at 18% 48%, rgba(185, 244, 208, 0.3), transparent 60%),
+    radial-gradient(54rem 42rem at 86% 64%, rgba(185, 244, 208, 0.34), transparent 60%),
+    radial-gradient(58rem 46rem at 30% 92%, rgba(185, 244, 208, 0.28), transparent 62%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Visible keyboard focus rings (brand green) on all interactive elements */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Type scale helpers — Steep-style: large, lighter weight, tight tracking */
+.h1-display {
+  font-size: clamp(2.75rem, 6.2vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.h2-display {
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+}
+
+/* Editorial italic-serif accent for emphasis words inside headings */
+.accent-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.body-text {
+  font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+  line-height: 1.6;
+}
+
+.eyebrow-text {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Hide scrollbar on horizontal snap rows while keeping scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
