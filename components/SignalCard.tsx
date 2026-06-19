@@ -144,7 +144,7 @@ export function SignalCard() {
         <div className="flex items-center gap-3 border-b border-border/80 bg-[color-mix(in_srgb,var(--brand-glow)_45%,white)] px-5 py-3">
           <span
             aria-hidden
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-grad text-[15px] text-white shadow-soft"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 text-[15px] text-white shadow-soft"
           >
             ◆
           </span>
@@ -298,7 +298,7 @@ export function SignalCard() {
             </span>
             <span
               aria-hidden
-              className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-grad text-[11px] text-white"
+              className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[11px] text-white"
             >
               ↑
             </span>

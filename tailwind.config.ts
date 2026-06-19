@@ -22,20 +22,8 @@ const config: Config = {
         muted: "var(--muted)",
         border: "var(--border)",
         surface: "var(--surface)",
+        surfacealt: "var(--surface-alt)",
         white: "rgb(255 255 255 / <alpha-value>)",
-        acc: {
-          modules: "var(--acc-modules)",
-          sitemap: "var(--acc-sitemap)",
-          roadmap: "var(--acc-roadmap)",
-          journey: "var(--acc-journey)",
-          cases: "var(--acc-cases)",
-        },
-        mod: {
-          ci: "var(--mod-ci)",
-          rep: "var(--mod-rep)",
-          ecom: "var(--mod-ecom)",
-          voice: "var(--mod-voice)",
-        },
         up: "var(--up)",
         down: "var(--down)",
         warn: "var(--warn)",
@@ -43,7 +31,6 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
-        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
       maxWidth: {
         container: "1200px",
@@ -59,9 +46,6 @@ const config: Config = {
       },
       letterSpacing: {
         eyebrow: "0.12em",
-      },
-      backgroundImage: {
-        "brand-grad": "var(--brand-grad)",
       },
     },
   },

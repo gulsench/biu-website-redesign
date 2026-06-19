@@ -13,16 +13,12 @@ interface SectionHeaderProps {
   align?: "left" | "center";
 }
 
-function renderTitle(title: string | HeadlineSegment[], accent?: string) {
+function renderTitle(title: string | HeadlineSegment[]) {
   if (typeof title === "string") return title;
 
   return title.map((seg, i) =>
     seg.accent ? (
-      <span
-        key={i}
-        className="accent-serif font-bold"
-        style={{ color: accent ?? "var(--brand-600)" }}
-      >
+      <span key={i} className="accent">
         {seg.text}
       </span>
     ) : (
@@ -45,7 +41,7 @@ export function SectionHeader({
       stagger
       className={cn(centered && "mx-auto max-w-2xl text-center", className)}
     >
-      <Eyebrow color={accent} className="mb-3">
+      <Eyebrow color={accent} className="mb-4">
         {label}
       </Eyebrow>
       <h2
@@ -54,7 +50,7 @@ export function SectionHeader({
           centered ? "mx-auto max-w-2xl" : "max-w-3xl"
         )}
       >
-        {renderTitle(title, accent)}
+        {renderTitle(title)}
       </h2>
       {sub && (
         <p

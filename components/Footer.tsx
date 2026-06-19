@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { footer } from "@/lib/content";
 
 const socialPaths: Record<string, string> = {
@@ -19,10 +20,21 @@ export function Footer() {
       className="border-t border-[rgba(255,255,255,0.1)] bg-ink text-[rgba(255,255,255,0.7)]"
     >
       <div className="mx-auto max-w-container px-6 py-10">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* Brand + contact + social */}
-          <div>
-            <a href="#" className="text-sm font-extrabold text-white">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-1">
+            <a
+              href="#"
+              aria-label="BIU home"
+              className="flex items-center gap-2 text-sm font-extrabold text-white"
+            >
+              <Image
+                src="/logo-white.png"
+                alt="BIU logo"
+                width={262}
+                height={250}
+                className="h-7 w-auto"
+              />
               BIU<span className="text-brand-500">.</span>
             </a>
             <p className="mt-2 max-w-[240px] text-[11px] leading-snug text-[rgba(255,255,255,0.45)]">
@@ -43,7 +55,7 @@ export function Footer() {
                   className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(255,255,255,0.12)] text-[rgba(255,255,255,0.6)] transition-colors hover:border-[rgba(255,255,255,0.3)] hover:text-white"
                 >
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d={socialPaths[s.icon]} />
+                    <path d={socialPaths[s.icon]} fillRule="evenodd" clipRule="evenodd" />
                   </svg>
                 </a>
               ))}

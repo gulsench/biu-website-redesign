@@ -10,19 +10,18 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  "inline-flex items-center justify-center font-bold rounded-chip transition-all duration-150 active:translate-y-px";
+  "inline-flex items-center justify-center font-semibold rounded-[10px] transition-all duration-150 active:translate-y-px";
 
 const variants: Record<Variant, string> = {
-  // primary = bg-ink, hover bg-brand-600
-  primary: "bg-ink text-white hover:bg-brand-600 shadow-soft hover:shadow-lift",
+  primary: "bg-ink text-white hover:bg-brand-600",
   outline:
-    "border-[1.5px] border-border text-mid hover:border-ink hover:text-ink bg-white",
+    "border border-border bg-white text-ink hover:border-ink",
   ghost: "text-mid hover:text-ink",
 };
 
 const sizes: Record<Size, string> = {
   md: "text-[13px] px-4 py-2",
-  lg: "text-sm px-7 py-3.5",
+  lg: "text-[15px] px-6 py-3",
 };
 
 export function Button({

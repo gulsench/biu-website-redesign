@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import {
-  Plus_Jakarta_Sans,
-  JetBrains_Mono,
-  Instrument_Serif,
-} from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { BoxedBackground } from "@/components/ui/BoxedBackground";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -20,19 +17,14 @@ const mono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
-// Editorial italic accent (Steep-style emphasis words)
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-serif",
-});
-
 export const metadata: Metadata = {
   title: "BIU — AI Growth Intelligence Platform",
   description:
-    "BIU measures your AI Share of Search across every LLM — and tells you exactly how to close the gap before your competitor does.",
+    "BIU measures how your brand shows up across AI answer engines, finds the one root cause behind the gap, and hands your team the next move.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -41,11 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
-    >
-      <body>{children}</body>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body>
+        <BoxedBackground />
+        <div className="relative z-10">{children}</div>
+      </body>
     </html>
   );
 }

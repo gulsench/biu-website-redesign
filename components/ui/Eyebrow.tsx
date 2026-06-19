@@ -10,8 +10,8 @@ interface EyebrowProps {
 export function Eyebrow({ children, color, className }: EyebrowProps) {
   return (
     <p
-      className={cn("eyebrow-text font-mono", className)}
-      style={{ color: color ?? "var(--muted)" }}
+      className={cn("eyebrow-text", className)}
+      style={{ color: color ?? "var(--brand-600)" }}
     >
       {children}
     </p>
