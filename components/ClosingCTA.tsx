@@ -1,9 +1,10 @@
 import { closingCta } from "@/lib/content";
+import { Button } from "./ui/Button";
 import { Reveal } from "./ui/Reveal";
 
 export function ClosingCTA() {
   return (
-    <section className="bg-ink text-white">
+    <section className="border-t border-border bg-band text-white">
       <div className="mx-auto max-w-container px-6 py-24 text-center md:py-28">
         <Reveal stagger className="mx-auto max-w-2xl">
           <h2 className="h2-display mb-5 text-white">
@@ -16,9 +17,9 @@ export function ClosingCTA() {
           <p className="mb-9 text-[15px] text-[rgba(255,255,255,0.7)]">
             {closingCta.sub}
           </p>
-          <button className="inline-flex items-center justify-center rounded-[10px] bg-white px-7 py-3.5 text-[15px] font-semibold text-ink transition-transform hover:-translate-y-0.5 active:translate-y-0">
+          <Button variant="audit" size="lg">
             {closingCta.cta}
-          </button>
+          </Button>
         </Reveal>
       </div>
     </section>

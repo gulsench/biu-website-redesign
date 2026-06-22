@@ -11,23 +11,31 @@ export function FeatureSection({
   data: FeatureData;
   flip?: boolean;
 }) {
+  const isCompetitive = data.id === "competitive";
+
   return (
-    <div className="border-b border-border">
+    <div
+      id={data.id}
+      className={cn(
+        "scroll-mt-16 border-b border-border",
+        isCompetitive
+          ? "bg-brand-accent/[0.04]"
+          : undefined,
+      )}
+    >
       <div className="mx-auto grid max-w-container items-center gap-10 px-6 py-20 md:py-24 lg:grid-cols-2 lg:gap-16">
         {/* Copy */}
         <Reveal stagger className={cn(flip && "lg:order-2")}>
           <RevealItem>
             <div className="mb-5 flex items-center gap-3">
               <Eyebrow>{data.eyebrow}</Eyebrow>
-              {data.status && (
-                <span
-                  className={cn(
-                    "rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
-                    data.status === "Live"
-                      ? "bg-brand-glow text-brand-700"
-                      : "bg-surfacealt text-muted"
-                  )}
-                >
+              {isCompetitive && (
+                <span className="rounded-full border border-brand-accent/30 bg-brand-accent/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-green-text">
+                  Ships first
+                </span>
+              )}
+              {data.status === "Coming soon" && (
+                <span className="rounded-full border border-border bg-card px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-mid">
                   {data.status}
                 </span>
               )}
@@ -48,7 +56,10 @@ export function FeatureSection({
           <RevealItem>
             <ul className="space-y-3">
               {data.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-[14.5px] text-ink">
+                <li
+                  key={b}
+                  className="flex items-start gap-3 text-[14.5px] text-ink"
+                >
                   <svg
                     width="18"
                     height="18"
@@ -74,7 +85,15 @@ export function FeatureSection({
 
         {/* Mock */}
         <Reveal delay={0.1} className={cn(flip && "lg:order-1")}>
-          <FeatureMock variant={data.mock} />
+          <div
+            className={cn(
+              "relative",
+              isCompetitive &&
+                "before:pointer-events-none before:absolute before:-inset-3 before:rounded-[20px] before:bg-brand-accent/[0.07] before:blur-xl",
+            )}
+          >
+            <FeatureMock variant={data.mock} highlight={isCompetitive} />
+          </div>
         </Reveal>
       </div>
     </div>

@@ -19,19 +19,21 @@ export const navLinks: { label: string; href: string }[] = [
 
 export const navCtas = {
   secondary: "Sign in",
-  primary: "Request demo",
 };
+
+/** Canonical engine list — use for all copy enumerations. */
+export const ENGINE_NAMES =
+  "ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude";
 
 // ── HERO ──────────────────────────────────────────────────────────────────
 export const hero = {
   eyebrow: "AI Growth Intelligence Platform",
   h1: [
     { text: "Know how your brand shows up in " },
-    { text: "AI answers", accent: true },
-    { text: "." },
+    { text: "AI answers.", accent: true },
   ] satisfies HeadlineSegment[],
-  lead: "Buyers ask ChatGPT, Perplexity, and Google AI Overviews before they ask you.",
-  sub: "BIU measures your presence across every answer engine, finds the one root cause behind the gap, and hands your team the next move — not another dashboard.",
+  lead: `Buyers ask ${ENGINE_NAMES} before they ask you.`,
+  sub: "BIU measures your presence across 5 AI answer engines, finds the one root cause behind the gap, and hands your team the next move — not another dashboard.",
   ctaPrimary: "Get your free AI visibility audit",
   ctaSecondary: "See how it works",
 };
@@ -40,7 +42,7 @@ export const hero = {
 export const outcomes: { value: string; label: string }[] = [
   { value: "1", label: "Market Momentum Score" },
   { value: "4", label: "Intelligence modules" },
-  { value: "3", label: "Answer engines tracked" },
+  { value: "5", label: "Answer engines tracked" },
   { value: "14 days", label: "To first root-cause alert" },
   { value: "24h", label: "To first category insight" },
   { value: "0", label: "Reports to read" },
@@ -67,16 +69,11 @@ export const engines: { name: string; icon: EngineIcon }[] = [
 // ── STATEMENT (single large idea) ───────────────────────────────────────────
 export const statement = {
   lead: "Ranking #1 on Google no longer means you're found.",
-  body: "For a growing share of buyers, the answer engine is the destination. If your brand isn't in the answer, you're not in the consideration set. BIU exists to measure that gap and close it.",
+  body: "For a growing share of buyers, the answer engine is the destination. If your brand isn't in the answer, you're not in the consideration set.",
 };
 
 // ── FEATURE SECTIONS (modules) ──────────────────────────────────────────────
-export type MockVariant =
-  | "copilot"
-  | "search"
-  | "reputation"
-  | "ecom"
-  | "reach";
+export type MockVariant = "search" | "reputation" | "ecom" | "reach";
 
 export interface FeatureSection {
   id: string;
@@ -85,43 +82,25 @@ export interface FeatureSection {
   body: string;
   bullets: string[];
   mock: MockVariant;
-  status?: "Live" | "Coming soon";
+  status?: "Coming soon";
 }
 
 export const features: FeatureSection[] = [
   {
-    id: "copilot",
-    eyebrow: "BIU Copilot",
-    title: [
-      { text: "Ask a question. Get the " },
-      { text: "one move", accent: true },
-      { text: " that matters." },
-    ],
-    body: "Copilot reads every signal across your modules, separates symptoms from cause, and tells you the single highest-leverage action — in plain language, the moment it matters.",
-    bullets: [
-      "Root-cause analysis, not raw charts",
-      "Prioritised next move, ranked by impact",
-      "Plain-language briefings your team can act on",
-    ],
-    mock: "copilot",
-    status: "Live",
-  },
-  {
     id: "competitive",
     eyebrow: "Competitive Intelligence",
     title: [
-      { text: "See where competitors appear in AI answers — " },
-      { text: "before you do", accent: true },
-      { text: "." },
+      { text: "See where competitors appear in " },
+      { text: "AI answers.", accent: true },
+      { text: " — before you do." },
     ],
-    body: "Track your AI Share of Search across categories, keyword clusters, and competitors. Know the day a rival starts winning the answer you're missing from.",
+    body: "Track your AI Share of Search (the percentage of AI-generated answers in your category where your brand appears) across categories, keyword clusters, and competitors. Know the day a rival starts winning the answer you're missing from.",
     bullets: [
       "AI Share of Search & Share of Voice",
       "Competitive benchmarking by category",
       "LLM visibility across every engine",
     ],
     mock: "search",
-    status: "Live",
   },
   {
     id: "reputation",
@@ -181,7 +160,7 @@ export const platform: { tag: string; title: string; body: string }[] = [
   {
     tag: "Measure",
     title: "AI visibility, quantified",
-    body: "AI Share of Search and Share of Voice across ChatGPT, Perplexity, and Google AI Overviews — by category and competitor.",
+    body: `AI Share of Search and Share of Voice across ${ENGINE_NAMES} — by category and competitor.`,
   },
   {
     tag: "Unify",
@@ -206,7 +185,7 @@ export const platform: { tag: string; title: string; body: string }[] = [
   {
     tag: "Monitor",
     title: "An always-on loop",
-    body: "Continuous monitoring across every engine and channel — the loop refines as your brand moves.",
+    body: "Continuous monitoring across 5 AI answer engines and every channel — the loop refines as your brand moves.",
   },
 ];
 
@@ -217,7 +196,7 @@ export const comparison = {
   rows: [
     {
       without: "Keyword tools that can't see AI answers",
-      with: "Visibility measured across every answer engine",
+      with: "AI Share of Search measured across 5 answer engines",
     },
     {
       without: "Signals scattered across five dashboards",
@@ -242,7 +221,7 @@ export const comparison = {
 export const faq: { q: string; a: string }[] = [
   {
     q: "What is AI Share of Search?",
-    a: "It's the percentage of AI-generated answers in a category where your brand appears — measured across ChatGPT, Perplexity, and Google AI Overviews. For most brands today, that number is close to zero.",
+    a: `It's the percentage of AI-generated answers in a category where your brand appears — measured across ${ENGINE_NAMES}. For most brands today, that number is close to zero.`,
   },
   {
     q: "How is this different from Semrush or other SEO tools?",
@@ -250,11 +229,11 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "What do I get from the free audit?",
-    a: "Your category run against the major answer engines, your current AI Share of Search, and the single biggest gap between you and the leaders — no demo call required.",
+    a: "Your category run against 5 AI answer engines, your current AI Share of Search, and the single biggest gap between you and the leaders — no demo call required.",
   },
   {
     q: "Which modules are available now?",
-    a: "Competitive Intelligence and BIU Copilot are live today. Reputation, Ecommerce, and Voice Intelligence are rolling out — all feeding the same Market Momentum Score.",
+    a: "Competitive Intelligence is live today. Reputation, Ecommerce, and Voice Intelligence are rolling out — all feeding the same Market Momentum Score.",
   },
   {
     q: "Who is BIU built for?",
@@ -277,37 +256,6 @@ export const closingCta = {
   cta: "Get your free AI visibility audit",
 };
 
-// ── BIU COPILOT MOCK (looping chatbot showcase) ─────────────────────────────
-export type SignalState = "up" | "down" | "warn";
-
-export interface SignalRow {
-  label: string;
-  value: string;
-  state: SignalState;
-}
-
-export const signalCard = {
-  title: "BIU Copilot · Analysing distribution data",
-  userPrompt: "How is my brand showing up across AI search?",
-  status: "Online",
-  rows: [
-    { label: "AI Share of Search", value: "12% ↓ from 30%", state: "down" },
-    { label: "AI Share of Voice", value: "0% vs leader 78%", state: "warn" },
-    { label: "Reputation Signal", value: "58 / 100", state: "warn" },
-    { label: "Reach Velocity", value: "71 ↓ from 76", state: "down" },
-    { label: "Market Momentum Score", value: "44 / 100", state: "down" },
-  ] as SignalRow[],
-  copilotLabel: "BIU Copilot",
-  insight: [
-    { text: "It's not 3 problems — it's one.", bold: true },
-    {
-      text: " Reels posting dropped 60% in May (5 → 2/week). That single change is now showing up across your AI visibility, hashtag reach, and review velocity simultaneously. Restoring cadence = ",
-    },
-    { text: "+12pts MMS in 30 days", bold: true },
-    { text: "." },
-  ],
-};
-
 // ── FOOTER ──────────────────────────────────────────────────────────────────
 export const footer = {
   tagline:
@@ -316,7 +264,7 @@ export const footer = {
   columns: [
     {
       title: "Platform",
-      links: ["Competitive Intelligence", "BIU Copilot", "Modules"],
+      links: ["Competitive Intelligence", "Modules"],
     },
     {
       title: "Solutions",
@@ -332,11 +280,11 @@ export const footer = {
     },
   ],
   social: [
-    { label: "X", href: "#", icon: "x" },
-    { label: "LinkedIn", href: "#", icon: "linkedin" },
-    { label: "Instagram", href: "#", icon: "instagram" },
-    { label: "YouTube", href: "#", icon: "youtube" },
+    { label: "X", icon: "x" },
+    { label: "LinkedIn", icon: "linkedin" },
+    { label: "Instagram", icon: "instagram" },
+    { label: "YouTube", icon: "youtube" },
   ],
   legalLeft: "© 2026 Boast It UP · boastitup.com",
-  legalRight: "Privacy · Terms · Security",
+  legalRight: "",
 };

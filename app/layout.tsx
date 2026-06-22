@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
-import { BoxedBackground } from "@/components/ui/BoxedBackground";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -27,6 +26,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#080a09",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -34,9 +37,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`}>
-      <body>
-        <BoxedBackground />
-        <div className="relative z-10">{children}</div>
+      <body className="min-h-screen bg-band antialiased">
+        {children}
       </body>
     </html>
   );

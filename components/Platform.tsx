@@ -21,10 +21,10 @@ export function Platform() {
           {platform.map((p, i) => (
             <div
               key={p.title}
-              className="bg-white p-7 transition-colors duration-300 hover:bg-brand-glow"
+              className="bg-card p-7 transition-colors duration-300 hover:bg-brand-glow"
             >
               <div className="mb-4 flex items-center gap-2">
-                <span className="font-mono text-[12px] font-semibold text-brand-600">
+                <span className="font-mono text-[12px] font-semibold text-green-text">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="eyebrow-text text-muted">{p.tag}</span>

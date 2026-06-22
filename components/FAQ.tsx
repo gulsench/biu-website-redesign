@@ -20,7 +20,7 @@ export function FAQ() {
           className="mb-14"
         />
 
-        <Reveal className="mx-auto max-w-3xl divide-y divide-border overflow-hidden rounded-2xl border border-border bg-white">
+        <Reveal className="mx-auto max-w-3xl divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
           {faq.map((item, i) => {
             const expanded = open === i;
             return (

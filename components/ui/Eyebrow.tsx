@@ -11,7 +11,7 @@ export function Eyebrow({ children, color, className }: EyebrowProps) {
   return (
     <p
       className={cn("eyebrow-text", className)}
-      style={{ color: color ?? "var(--brand-600)" }}
+      style={{ color: color ?? "var(--color-green-text)" }}
     >
       {children}
     </p>

@@ -22,7 +22,7 @@ export function Comparison() {
             <div className="px-5 py-4 text-[13px] font-semibold text-muted sm:px-7">
               {comparison.withoutLabel}
             </div>
-            <div className="border-l border-border px-5 py-4 text-[13px] font-bold text-brand-700 sm:px-7">
+            <div className="border-l border-border px-5 py-4 text-[13px] font-bold text-green-text sm:px-7">
               {comparison.withLabel}
             </div>
           </div>
@@ -37,7 +37,7 @@ export function Comparison() {
                 </span>
                 {row.without}
               </div>
-              <div className="flex items-start gap-2.5 border-l border-border bg-brand-glow/30 px-5 py-4 text-[13.5px] font-medium text-ink sm:px-7">
+              <div className="flex items-start gap-2.5 border-l border-border bg-[color-mix(in_srgb,var(--brand-accent)_12%,var(--card))] px-5 py-4 text-[13.5px] font-medium text-ink sm:px-7">
                 <svg
                   width="17"
                   height="17"

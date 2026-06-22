@@ -3,27 +3,34 @@
 @tailwind utilities;
 
 :root {
-  /* Brand green — the single accent. */
-  --brand-900: #06301f;
-  --brand-700: #0b5c3b;
-  --brand-600: #0e7a4f; /* primary accent / link */
-  --brand-500: #16a34a;
-  --brand-400: #34d27b;
-  --brand-glow: #d6f5e3;
+  /* Brand green — tuned for dark canvas */
+  --brand-900: #a7f3d0;
+  --brand-700: #34d27b;
+  --brand-600: #36bd83;
+  --brand-500: #4ade80;
+  --brand-400: #6ee7a8;
+  --brand-glow: #0f1613;
+  --brand-accent: #36bd83;
+  --color-green-text: #4ade80;
 
-  /* Neutrals — charcoal + grays + white (restrained) */
-  --ink: #15181a; /* near-black headings */
-  --mid: #515a57; /* body text */
-  --muted: #8a918d; /* tertiary / labels */
-  --border: #e9eae8; /* hairlines */
-  --surface: #ffffff; /* primary canvas */
-  --surface-alt: #f7f8f7; /* alternating band */
+  /* Neutrals — footer-deep canvas */
+  --ink: #ffffff;
+  --mid: rgba(255, 255, 255, 0.72);
+  --muted: rgba(255, 255, 255, 0.45);
+  --border: rgba(255, 255, 255, 0.1);
+  --surface: #080a09;
+  --surface-alt: #0e100f;
+  --card: #121412;
+  --card-inner: #1a1c1a;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-highlight-border: rgba(54, 189, 131, 0.45);
+  --band: #080a09;
   --white: #ffffff;
 
-  /* Signal colors — green scale only */
-  --up: #16a34a;
-  --down: #0b5c3b;
-  --warn: #34d27b;
+  /* Signal colors */
+  --up: #4ade80;
+  --down: #36bd83;
+  --warn: #6ee7a8;
 }
 
 * {
@@ -34,10 +41,11 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  background: var(--surface);
+  background: var(--band);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -51,17 +59,17 @@ a {
 }
 
 :where(a, button, input, [tabindex]):focus-visible {
-  outline: 2px solid var(--brand-600);
+  outline: 2px solid var(--brand-500);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 /* Type scale — large, tight, heavy headings on a calm canvas. */
 .h1-display {
-  font-size: clamp(2.85rem, 6.6vw, 5rem);
+  font-size: clamp(2.75rem, 5.8vw, 4.75rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
 }
 
 .h2-display {
@@ -93,7 +101,7 @@ a {
 
 /* Green accent word inside headings. */
 .accent {
-  color: var(--brand-600);
+  color: var(--color-green-text);
 }
 
 .no-scrollbar {

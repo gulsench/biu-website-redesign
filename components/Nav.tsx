@@ -12,7 +12,7 @@ export function Nav() {
   const reduce = useReducedMotion();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/85 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70">
+    <header className="sticky top-0 z-50 border-b border-[rgba(255,255,255,0.08)] bg-band/90 backdrop-blur-xl supports-[backdrop-filter]:bg-band/75">
       <nav
         aria-label="Primary"
         className="mx-auto flex h-16 max-w-container items-center justify-between px-6"
@@ -22,15 +22,15 @@ export function Nav() {
           aria-label="BIU home"
           className="flex items-center gap-2 text-[17px] font-extrabold tracking-tight text-ink"
         >
+          {/* TODO: wire real destination before launch */}
           <Image
-            src="/logo.png"
+            src="/logo-white.png"
             alt="BIU logo"
             width={200}
             height={191}
             priority
             className="h-7 w-auto"
           />
-          BIU<span className="text-brand-600">.</span>
         </a>
 
         <ul className="hidden items-center gap-7 md:flex">
@@ -47,8 +47,7 @@ export function Nav() {
         </ul>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="ghost">{navCtas.secondary}</Button>
-          <Button variant="primary">{navCtas.primary}</Button>
+          <Button variant="outline">{navCtas.secondary}</Button>
         </div>
 
         <button
@@ -72,7 +71,7 @@ export function Nav() {
             initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-border bg-white md:hidden"
+            className="overflow-hidden border-t border-border bg-band md:hidden"
           >
             <div className="space-y-1 px-6 py-4">
               {navLinks.map((link) => (
@@ -85,12 +84,9 @@ export function Nav() {
                   {link.label}
                 </a>
               ))}
-              <div className="flex gap-2 pt-3">
-                <Button variant="outline" size="md" className="flex-1">
+              <div className="pt-3">
+                <Button variant="outline" size="md" className="w-full">
                   {navCtas.secondary}
-                </Button>
-                <Button variant="primary" size="md" className="flex-1">
-                  {navCtas.primary}
                 </Button>
               </div>
             </div>
