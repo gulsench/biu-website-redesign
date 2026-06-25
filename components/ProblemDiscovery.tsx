@@ -55,7 +55,7 @@ function ProblemVisual({ visual }: { visual: ProblemBlock["visual"] }) {
  </span>
  <span
  className={cn(
-"text-[14px] font-medium",
+"text-[14px] font-normal",
  s.on ?"text-ink":"text-muted",
  )}
  >
@@ -81,7 +81,7 @@ function ProblemVisual({ visual }: { visual: ProblemBlock["visual"] }) {
  </div>
  ))}
  </div>
- <div className="mt-4 border border-dashed border-border px-4 py-3 text-center text-[12px] font-medium text-muted">
+ <div className="mt-4 border border-dashed border-border px-4 py-3 text-center text-[12px] font-normal text-muted">
  No single source of truth
  </div>
  </div>
@@ -146,9 +146,9 @@ function ProblemRow({ data, flip }: { data: ProblemBlock; flip?: boolean }) {
 
 export function ProblemDiscovery() {
  return (
- <section id="why"className="border-b border-border bg-surface">
+ <section id="why"className="section-edge-b bg-surface">
  {problems.map((p, i) => (
- <div key={p.id} className={cn(i > 0 &&"border-t border-border")}>
+ <div key={p.id} className={cn(i > 0 &&"section-edge-t")}>
  <ProblemRow data={p} flip={i % 2 === 1} />
  </div>
  ))}

@@ -130,7 +130,23 @@ export type MockVariant =
   | "content"
   | "video"
   | "roleplay"
-  | "reporting";
+  | "reporting"
+  | "social-content"
+  | "social-hashtag"
+  | "social-comments"
+  | "social-engagement"
+  | "aeo-share"
+  | "aeo-gaps"
+  | "aeo-alerts"
+  | "aeo-benchmark"
+  | "comp-share"
+  | "comp-gaps"
+  | "comp-moves"
+  | "comp-benchmark"
+  | "rep-awareness"
+  | "rep-trust"
+  | "rep-consideration"
+  | "rep-choice";
 
 export interface FeatureSection {
   id: string;
@@ -483,8 +499,6 @@ export const framework = {
 // ── PRODUCT PILLARS (modules × pillars) ─────────────────────────────────────
 export const pillarsCategory = {
   title: "Four intelligence modules",
-  modulesLabel: "Our four modules",
-  pillarsLabel: "Product pillars",
   cta: "Request Demo",
 };
 
@@ -495,8 +509,16 @@ export type ProductPillar = {
 };
 
 export const productModules = [
-  { id: "aeo", label: "AEO" },
-  { id: "social", label: "Social Media" },
+  {
+    id: "aeo",
+    label: "AEO",
+    subtext: "Perplexity · ChatGPT · Google AI Overviews",
+  },
+  {
+    id: "social",
+    label: "Social Media",
+    subtext: "Reach · Engagement · Share of voice",
+  },
   { id: "competition", label: "Competition" },
   { id: "reputation", label: "Reputation" },
 ] as const;
@@ -505,35 +527,36 @@ export type ProductModuleId = (typeof productModules)[number]["id"];
 
 export const modulePillars: Record<ProductModuleId, ProductPillar[]> = {
   aeo: [
-    { id: "chatgpt", label: "ChatGPT", mock: "search" },
-    { id: "google-ai-overviews", label: "Google AI Overviews", mock: "search" },
-    { id: "perplexity", label: "Perplexity", mock: "search" },
-    { id: "claude", label: "Claude", mock: "search" },
+    { id: "share-of-search", label: "Share of Search", mock: "aeo-share" },
+    { id: "answer-gaps", label: "Answer Gaps", mock: "aeo-gaps" },
+    { id: "citation-alerts", label: "Citation Alerts", mock: "aeo-alerts" },
+    { id: "aeo-score", label: "AEO Score", mock: "aeo-benchmark" },
   ],
   social: [
-    { id: "content", label: "Content", mock: "reach" },
-    { id: "hashtag", label: "Hashtag", mock: "reach" },
-    { id: "comments", label: "Comments", mock: "reach" },
-    { id: "engagement", label: "Engagement", mock: "reach" },
+    { id: "content", label: "Content", mock: "social-content" },
+    { id: "hashtag", label: "Hashtag", mock: "social-hashtag" },
+    { id: "comments", label: "Comments", mock: "social-comments" },
+    { id: "engagement", label: "Engagement", mock: "social-engagement" },
   ],
   competition: [
-    { id: "category-benchmark", label: "Category benchmarking", mock: "search" },
-    { id: "share-of-voice", label: "Share of voice", mock: "search" },
-    { id: "llm-visibility", label: "LLM visibility", mock: "search" },
-    { id: "rival-tracking", label: "Rival tracking", mock: "search" },
+    { id: "share-of-voice", label: "Share of Voice", mock: "comp-share" },
+    { id: "content-gap", label: "Content Gap", mock: "comp-gaps" },
+    { id: "move-tracker", label: "Move Tracker", mock: "comp-moves" },
+    { id: "benchmark-score", label: "Benchmark Score", mock: "comp-benchmark" },
   ],
   reputation: [
-    { id: "awareness", label: "Awareness", mock: "reputation" },
-    { id: "trust", label: "Trust", mock: "reputation" },
-    { id: "consideration", label: "Consideration", mock: "reputation" },
-    { id: "choice", label: "Choice", mock: "reputation" },
+    { id: "awareness", label: "Awareness", mock: "rep-awareness" },
+    { id: "trust", label: "Trust", mock: "rep-trust" },
+    { id: "consideration", label: "Consideration", mock: "rep-consideration" },
+    { id: "choice", label: "Choice", mock: "rep-choice" },
   ],
 };
 
 export const modulesHub = {
   label: "BIU",
   title: "Market Momentum Score",
-  body: "Every module feeds one score your whole team reads the same way.",
+  score: 74,
+  maxScore: 100,
 };
 
 // ── ROADMAP (coming soon) ───────────────────────────────────────────────────

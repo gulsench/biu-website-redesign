@@ -57,7 +57,7 @@ export function Footer() {
             </p>
             <a
               href={`mailto:${footer.email}`}
-              className="mt-3 inline-block text-[12px] font-medium text-[var(--footer-text)] transition-colors"
+              className="mt-3 inline-block text-[12px] font-normal text-[var(--footer-text)] transition-colors"
             >
               {footer.email}
             </a>

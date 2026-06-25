@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from "./ui/Reveal";
 
 export function BlogIndex() {
   return (
-    <section className="border-b border-border bg-surface">
+    <section className="section-edge-b bg-surface">
       <div className="section-wrap">
         <SectionHeader
           label={blog.eyebrow}
@@ -28,7 +28,7 @@ export function BlogIndex() {
                   {post.excerpt}
                 </p>
                 <footer className="mt-6 border-t border-border pt-4">
-                  <time className="text-[12px] font-medium text-muted" dateTime={post.date}>
+                  <time className="text-[12px] font-normal text-muted" dateTime={post.date}>
                     {post.date}
                   </time>
                 </footer>

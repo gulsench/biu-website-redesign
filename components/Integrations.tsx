@@ -5,7 +5,7 @@ import { SectionBackground } from "./ui/SectionBackground";
 
 export function Integrations() {
  return (
- <section id="integrations" className="relative overflow-hidden border-b border-border bg-surface">
+ <section id="integrations" className="relative overflow-hidden section-edge-b bg-surface">
       <SectionBackground tone="surface" />
       <div className="section-wrap relative z-10">
  <SectionHeader

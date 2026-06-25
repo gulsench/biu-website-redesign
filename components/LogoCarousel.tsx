@@ -4,7 +4,7 @@ import { SectionBackground } from "./ui/SectionBackground";
 export function LogoCarousel() {
   const logos = [...socialProof.logos, ...socialProof.logos];
   return (
-    <section className="relative overflow-hidden border-y border-border bg-band">
+    <section className="relative overflow-hidden section-edge-y bg-band">
       <SectionBackground tone="band" subtle />
       <div className="relative z-10 mx-auto max-w-container px-4 py-8 sm:px-6 sm:py-12">
         <p className="eyebrow-text mb-6 text-center text-muted sm:mb-8">

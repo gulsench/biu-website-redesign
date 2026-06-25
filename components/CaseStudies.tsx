@@ -5,7 +5,7 @@ import { SectionBackground } from "./ui/SectionBackground";
 
 export function CaseStudies({ showSub = false }: { showSub?: boolean }) {
   return (
-    <section id="customer-stories" className="relative overflow-hidden border-b border-border bg-band">
+    <section id="customer-stories" className="relative overflow-hidden section-edge-b bg-band">
       <SectionBackground tone="band" />
       <div className="section-wrap relative z-10">
         <SectionHeader

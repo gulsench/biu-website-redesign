@@ -17,7 +17,7 @@ export function FeatureSection({
     <div
       id={data.id}
       className={cn(
-        "scroll-mt-16 border-b border-border",
+        "scroll-mt-16 section-edge-b",
         isAeo
           ? "bg-brand-accent/[0.04]"
           : undefined,

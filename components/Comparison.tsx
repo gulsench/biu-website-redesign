@@ -4,7 +4,7 @@ import { Reveal } from "./ui/Reveal";
 
 export function Comparison() {
   return (
-    <section id="compare" className="border-b border-border">
+    <section id="compare" className="section-edge-b">
       <div className="mx-auto max-w-container px-6 py-24">
         <SectionHeader
           label="Why BIU"
@@ -37,7 +37,7 @@ export function Comparison() {
                 </span>
                 {row.without}
               </div>
-              <div className="flex items-start gap-2.5 border-l border-border bg-[color-mix(in_srgb,var(--brand-accent)_12%,var(--card))] px-5 py-4 text-[13.5px] font-medium text-ink sm:px-7">
+              <div className="flex items-start gap-2.5 border-l border-border bg-[color-mix(in_srgb,var(--brand-accent)_12%,var(--card))] px-5 py-4 text-[13.5px] font-normal text-ink sm:px-7">
                 <svg
                   width="17"
                   height="17"

@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from "./ui/Reveal";
 
 export function AboutContent() {
   return (
-    <section className="border-b border-border bg-surface">
+    <section className="section-edge-b bg-surface">
       <div className="section-wrap">
         <SectionHeader
           label={about.eyebrow}

@@ -3,7 +3,7 @@ import { Reveal } from "./ui/Reveal";
 
 export function Statement() {
   return (
-    <section className="border-b border-border">
+    <section className="section-edge-b">
       <div className="mx-auto max-w-container px-6 py-24 md:py-32">
         <Reveal stagger className="mx-auto max-w-3xl text-center">
           <p className="h2-display text-ink">{statement.lead}</p>

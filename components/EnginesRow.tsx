@@ -4,7 +4,7 @@ import { Reveal } from "./ui/Reveal";
 
 export function EnginesRow() {
   return (
-    <section className="border-b border-border">
+    <section className="section-edge-b">
       <div className="mx-auto max-w-container px-6 py-12">
         <Reveal className="text-center">
           <p className="eyebrow-text mb-7 text-muted">{enginesHeading}</p>

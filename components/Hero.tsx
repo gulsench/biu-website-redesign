@@ -1,26 +1,25 @@
 import { hero } from "@/lib/content";
 import { Button } from "./ui/Button";
+import { GradientBackground } from "./ui/gradient-backgrounds";
 import { Reveal, RevealItem } from "./ui/Reveal";
-import { SectionBackground } from "./ui/SectionBackground";
 import { HeroSubline } from "./HeroSubline";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-surface">
-      <SectionBackground tone="surface" />
-
-      <div className="relative z-10 mx-auto flex max-w-container flex-col items-center px-6 py-14 text-center md:px-8 md:py-16 lg:py-20">
+    <section className="relative overflow-hidden">
+      <GradientBackground variant="brand" className="bg-surface">
+      <div className="mx-auto flex max-w-container flex-col items-center px-6 py-14 text-center md:px-8 md:py-16 lg:py-20">
         {/* Copy */}
         <Reveal stagger className="mx-auto max-w-4xl">
           <RevealItem>
-            <span className="inline-flex items-center gap-2 border border-border bg-white px-4 py-2 text-[13px] font-medium text-mid">
+            <span className="inline-flex items-center gap-2 border border-border bg-white px-4 py-2">
               <span className="h-1.5 w-1.5 bg-brand-600" />
-              {hero.eyebrow}
+              <span className="eyebrow-text text-muted">{hero.eyebrow}</span>
             </span>
           </RevealItem>
 
           <RevealItem>
-            <h1 className="mx-auto mt-5 max-w-3xl text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-[1.08] tracking-[-0.04em] text-ink">
+            <h1 className="mx-auto mt-5 max-w-3xl text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.08] tracking-[-0.04em] text-ink">
               <span className="block">
                 {hero.h1.map((seg, i) => (
                   <span key={i} className={seg.accent ? "accent" : undefined}>
@@ -28,7 +27,7 @@ export function Hero() {
                   </span>
                 ))}
               </span>
-              <HeroSubline className="mt-3 block text-[clamp(1.5rem,3vw,2.125rem)] font-medium leading-[1.15] tracking-[-0.035em] text-ink/75">
+              <HeroSubline className="mt-3 block text-[clamp(1.5rem,3vw,2.125rem)] font-normal leading-[1.15] tracking-[-0.035em] text-ink/75">
                 {hero.h1Line2}
               </HeroSubline>
             </h1>
@@ -50,6 +49,7 @@ export function Hero() {
           </RevealItem>
         </Reveal>
       </div>
+      </GradientBackground>
     </section>
   );
 }

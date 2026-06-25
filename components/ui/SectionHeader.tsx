@@ -11,6 +11,8 @@ interface SectionHeaderProps {
   accent?: string;
   className?: string;
   align?: "left" | "center";
+  /** Light text on dark section backgrounds (footer-style). */
+  inverted?: boolean;
 }
 
 function renderTitle(title: string | HeadlineSegment[]) {
@@ -34,21 +36,24 @@ export function SectionHeader({
   accent,
   className,
   align = "center",
+  inverted = false,
 }: SectionHeaderProps) {
   const centered = align === "center";
+  const eyebrowColor = accent ?? (inverted ? "var(--brand-400)" : undefined);
   return (
     <Reveal
       stagger
       className={cn(centered && "mx-auto max-w-2xl text-center", className)}
     >
       {label ? (
-        <Eyebrow color={accent} className="mb-4">
+        <Eyebrow color={eyebrowColor} className="mb-4">
           {label}
         </Eyebrow>
       ) : null}
       <h2
         className={cn(
-          "h2-display mb-4 text-ink",
+          "h2-display mb-4",
+          inverted ? "text-white" : "text-ink",
           centered ? "mx-auto max-w-2xl" : "max-w-3xl"
         )}
       >
@@ -57,7 +62,8 @@ export function SectionHeader({
       {sub && (
         <p
           className={cn(
-            "body-text max-w-xl text-mid",
+            "body-text max-w-xl",
+            inverted ? "text-[var(--footer-text)]" : "text-mid",
             centered && "mx-auto"
           )}
         >

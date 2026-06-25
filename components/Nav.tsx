@@ -101,7 +101,7 @@ export function Nav() {
         <a
           href="/"
           aria-label="BIU home"
-          className="flex shrink-0 items-center gap-2 text-[17px] font-extrabold tracking-tight text-ink"
+          className="flex shrink-0 items-center gap-2 text-[17px] font-bold tracking-tight text-ink"
         >
           <Image
             src="/logo.png"
@@ -127,7 +127,7 @@ export function Nav() {
                   aria-expanded={resourcesOpen}
                   aria-haspopup="true"
                   onClick={() => setResourcesOpen((v) => !v)}
-                  className="inline-flex items-center gap-1 text-[14px] font-medium text-mid transition-colors hover:text-ink"
+                  className="inline-flex items-center gap-1 text-[14px] font-normal text-mid transition-colors hover:text-ink"
                 >
                   {item.label}
                   <Chevron open={resourcesOpen} />
@@ -150,7 +150,7 @@ export function Nav() {
                             <a
                               role="menuitem"
                               href={child.href}
-                              className="block px-4 py-2.5 text-[14px] font-medium text-mid transition-colors hover:bg-surfacealt hover:text-ink"
+                              className="block px-4 py-2.5 text-[14px] font-normal text-mid transition-colors hover:bg-surfacealt hover:text-ink"
                             >
                               {child.label}
                             </a>
@@ -165,7 +165,7 @@ export function Nav() {
               <li key={item.label}>
                 <a
                   href={item.href}
-                  className="text-[14px] font-medium text-mid transition-colors hover:text-ink"
+                  className="text-[14px] font-normal text-mid transition-colors hover:text-ink"
                 >
                   {item.label}
                 </a>
@@ -213,7 +213,7 @@ export function Nav() {
                         type="button"
                         aria-expanded={mobileResourcesOpen}
                         onClick={() => setMobileResourcesOpen((v) => !v)}
-                        className="flex w-full items-center justify-between rounded-sm px-3 py-3 text-left text-[15px] font-medium text-ink transition-colors hover:text-brand-700"
+                        className="flex w-full items-center justify-between rounded-sm px-3 py-3 text-left text-[15px] font-normal text-ink transition-colors hover:text-brand-700"
                       >
                         {item.label}
                         <Chevron open={mobileResourcesOpen} />
@@ -232,7 +232,7 @@ export function Nav() {
                                 <a
                                   href={child.href}
                                   onClick={closeMobile}
-                                  className="block py-2.5 text-[14px] font-medium text-mid transition-colors hover:text-ink"
+                                  className="block py-2.5 text-[14px] font-normal text-mid transition-colors hover:text-ink"
                                 >
                                   {child.label}
                                 </a>
@@ -247,7 +247,7 @@ export function Nav() {
                       <a
                         href={item.href}
                         onClick={closeMobile}
-                        className="block rounded-sm px-3 py-3 text-[15px] font-medium text-ink transition-colors hover:text-brand-700"
+                        className="block rounded-sm px-3 py-3 text-[15px] font-normal text-ink transition-colors hover:text-brand-700"
                       >
                         {item.label}
                       </a>

@@ -27,14 +27,13 @@ export function ProductPillars() {
   }
 
   return (
-    <section id="modules" className="relative overflow-hidden border-b border-border bg-surface">
+    <section id="modules" className="relative overflow-hidden section-edge-b bg-surface">
       <SectionBackground tone="surface" />
       <div className="section-wrap relative z-10">
         <h2 className="h2-display mb-8 max-w-2xl text-ink md:mb-12">{pillarsCategory.title}</h2>
 
         {/* Module selector */}
-        <div className="mb-12">
-          <p className="eyebrow-text mb-4 text-mid">{pillarsCategory.modulesLabel}</p>
+        <div className="mb-10 md:mb-12">
           <div
             role="tablist"
             aria-label="Product modules"
@@ -66,11 +65,9 @@ export function ProductPillars() {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(280px,380px)_1fr] lg:gap-14">
           {/* Left: pillar list */}
           <div>
-            <p className="eyebrow-text mb-4 text-mid">{pillarsCategory.pillarsLabel}</p>
-            <p className="mb-6 text-[15px] font-medium text-ink">
+            <p className="mb-4 text-[13px] font-semibold text-green-text sm:text-[14px]">
               {currentModule.label}
             </p>
-
             <div
               role="tablist"
               aria-label={`${currentModule.label} product pillars`}
@@ -102,22 +99,24 @@ export function ProductPillars() {
           </div>
 
           {/* Right: preview panel */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={previewKey}
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
-              transition={{ duration: reduce ? 0 : 0.28 }}
-              className="module-preview-panel flex min-h-[300px] items-center justify-center p-4 sm:min-h-[360px] sm:p-8 lg:min-h-[480px] lg:p-12"
-            >
-              <FeatureMock
-                variant={currentPillar.mock}
-                modulePreview
-                highlight={activePillar === 0}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="module-preview-panel flex h-[360px] items-stretch justify-center p-4 sm:h-[400px] sm:p-8 lg:h-[480px] lg:p-12">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={previewKey}
+                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
+                transition={{ duration: reduce ? 0 : 0.28 }}
+                className="flex h-full w-full max-w-md items-stretch"
+              >
+                <FeatureMock
+                  variant={currentPillar.mock}
+                  modulePreview
+                  highlight={activePillar === 0}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>

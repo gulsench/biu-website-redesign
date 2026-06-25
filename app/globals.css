@@ -8,6 +8,30 @@
   *::after {
     border-radius: 0;
   }
+
+  html,
+  body {
+    cursor: default;
+  }
+
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  label[for],
+  select,
+  summary {
+    cursor: pointer;
+  }
+
+  input:not([type="button"]):not([type="submit"]):not([type="reset"]):not(
+      [type="checkbox"]
+    ):not([type="radio"]):not([type="hidden"]),
+  textarea {
+    cursor: text;
+  }
 }
 
 @layer utilities {
@@ -42,12 +66,15 @@
   --ink: #1a1a1a;
   --mid: #525252;
   --muted: #737373;
-  --border: #e5e5e5;
+  --border: rgba(26, 26, 26, 0.12);
+  --section-border-outer: rgba(26, 26, 26, 0.1);
+  --section-border-inner: transparent;
+  --section-border-gap: 3px;
   --surface: #fafafa;
   --surface-alt: #f5f5f5;
   --card: #ffffff;
   --card-inner: #f9fafb;
-  --card-border: #e5e5e5;
+  --card-border: rgba(26, 26, 26, 0.12);
   --card-highlight-border: rgba(22, 163, 74, 0.35);
   --band: #ffffff;
 
@@ -100,14 +127,14 @@ a {
 /* Type scale — large, tight, heavy headings on a calm canvas. */
 .h1-display {
   font-size: clamp(2.75rem, 5.8vw, 4.75rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.02;
 }
 
 .h2-display {
   font-size: clamp(2.1rem, 4.4vw, 3.25rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.02;
 }
@@ -125,7 +152,6 @@ a {
 }
 
 .eyebrow-text {
-  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -246,6 +272,87 @@ a {
   padding-bottom: 4rem;
 }
 
+/* Section dividers: outer hairline + transparent inner line (double-rule effect). */
+.section-edge-b {
+  position: relative;
+  border-bottom: none;
+}
+
+.section-edge-b::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(1px + var(--section-border-gap) + 1px);
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(var(--section-border-outer), var(--section-border-outer)) 0 0 / 100% 1px
+      no-repeat,
+    linear-gradient(var(--section-border-inner), var(--section-border-inner)) 0
+      calc(1px + var(--section-border-gap)) / 100% 1px no-repeat;
+}
+
+.section-edge-t {
+  position: relative;
+  border-top: none;
+}
+
+.section-edge-t::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(1px + var(--section-border-gap) + 1px);
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(var(--section-border-outer), var(--section-border-outer)) 0 0 / 100% 1px
+      no-repeat,
+    linear-gradient(var(--section-border-inner), var(--section-border-inner)) 0
+      calc(1px + var(--section-border-gap)) / 100% 1px no-repeat;
+}
+
+.section-edge-y {
+  position: relative;
+  border-top: none;
+  border-bottom: none;
+}
+
+.section-edge-y::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(1px + var(--section-border-gap) + 1px);
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(var(--section-border-outer), var(--section-border-outer)) 0 0 / 100% 1px
+      no-repeat,
+    linear-gradient(var(--section-border-inner), var(--section-border-inner)) 0
+      calc(1px + var(--section-border-gap)) / 100% 1px no-repeat;
+}
+
+.section-edge-y::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(1px + var(--section-border-gap) + 1px);
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(var(--section-border-outer), var(--section-border-outer)) 0 0 / 100% 1px
+      no-repeat,
+    linear-gradient(var(--section-border-inner), var(--section-border-inner)) 0
+      calc(1px + var(--section-border-gap)) / 100% 1px no-repeat;
+}
+
 @media (min-width: 640px) {
   .section-wrap {
     padding-left: 1.5rem;
@@ -333,6 +440,59 @@ a {
 .site-footer .footer-social:hover {
   border-color: rgba(74, 222, 128, 0.45);
   color: var(--brand-400);
+}
+
+/* Dark content sections — same canvas as footer */
+.site-section-dark {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.site-section-dark.section-edge-b::after,
+.site-section-dark.section-edge-t::before,
+.site-section-dark.section-edge-y::before,
+.site-section-dark.section-edge-y::after {
+  --section-border-outer: rgba(255, 255, 255, 0.12);
+}
+
+.site-section-dark .h2-display,
+.site-section-dark .h3-display,
+.site-section-dark .text-ink {
+  color: #fff;
+}
+
+.site-section-dark .body-text,
+.site-section-dark .text-mid {
+  color: var(--footer-text);
+}
+
+.site-section-dark .text-muted {
+  color: var(--footer-muted);
+}
+
+.site-section-dark .accent {
+  color: var(--brand-400);
+}
+
+.site-section-dark .eyebrow-text {
+  color: var(--brand-400);
+}
+
+.site-section-dark .border-border,
+.site-section-dark .border-card-border {
+  border-color: var(--footer-border);
+}
+
+.site-section-dark .bg-card {
+  background: var(--footer-bg-elevated);
+}
+
+.site-section-dark .bg-surfacealt {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.site-section-dark .shadow-lift {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
 }
 
 /* Four modules hub diagram */

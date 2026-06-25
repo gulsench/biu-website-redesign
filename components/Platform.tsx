@@ -4,7 +4,7 @@ import { Reveal } from "./ui/Reveal";
 
 export function Platform() {
   return (
-    <section id="platform" className="border-b border-border">
+    <section id="platform" className="section-edge-b">
       <div className="mx-auto max-w-container px-6 py-24">
         <SectionHeader
           label="The platform"

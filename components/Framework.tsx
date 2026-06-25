@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from"./ui/Reveal";
 
 export function Framework() {
  return (
- <section id="framework"className="border-b border-border bg-band">
+ <section id="framework"className="section-edge-b bg-band">
  <div className="mx-auto max-w-container px-6 py-24">
  <SectionHeader
  label={framework.eyebrow}
