@@ -28,11 +28,11 @@ export function CustomerStories() {
   return (
     <section
       id="customer-stories"
-      className="w-full border-t border-color-border bg-color-bg py-16 md:py-24"
+      className="w-full overflow-x-clip border-t border-color-border bg-color-bg py-12 sm:py-16 md:py-24"
     >
       <div className="section-container">
-        <Reveal className="mb-12 text-center md:mb-14">
-          <h2 className="font-heading text-3xl font-medium text-color-text md:text-5xl">
+        <Reveal className="mb-10 text-center sm:mb-12 md:mb-14">
+          <h2 className="font-heading text-[clamp(1.75rem,5vw,3rem)] font-medium text-color-text md:text-5xl">
             Customer <span className="text-blue">stories</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-color-text-muted md:text-lg">
@@ -41,10 +41,10 @@ export function CustomerStories() {
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           {stories.map((story, idx) => (
             <Reveal key={story.name} delay={idx * 0.07} y={20}>
-              <figure className="flex h-full flex-col rounded-lg border border-color-border bg-color-surface p-7 md:p-8">
+              <figure className="flex h-full min-w-0 flex-col rounded-lg border border-color-border bg-color-surface p-5 sm:p-7 md:p-8">
                 <span className="mb-5 inline-flex w-fit rounded-full bg-color-blue-tint px-3 py-1 text-xs font-semibold text-blue">
                   {story.metric}
                 </span>

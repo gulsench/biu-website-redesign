@@ -1,4 +1,10 @@
-import { Check } from "lucide-react";
+import { Bot, Check } from "lucide-react";
+import {
+  ModuleCard,
+  ModuleCardDivider,
+  ModuleCardHeader,
+  ModuleCardSubtitle,
+} from "@/components/ModuleCard";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
@@ -18,13 +24,15 @@ const chat = [
 
 function ChatMock() {
   return (
-    <div className="rounded-lg border border-color-border bg-color-surface p-5 shadow-sm sm:p-6">
-      <div className="mb-5 flex items-center gap-2">
-        <span className="h-2 w-2 rounded-full bg-blue" aria-hidden />
-        <p className="font-mono text-[11px] font-medium uppercase tracking-widest text-color-text-dim">
-          BIU Copilot
-        </p>
-      </div>
+    <ModuleCard>
+      <ModuleCardHeader
+        label="BIU Copilot"
+        icon={<Bot size={18} className="shrink-0 text-blue" strokeWidth={2} aria-hidden />}
+      />
+      <ModuleCardSubtitle>
+        Your AI analyst — surfaces the one change that matters
+      </ModuleCardSubtitle>
+      <ModuleCardDivider />
       <div className="space-y-3">
         {chat.map((message, i) => (
           <div
@@ -33,10 +41,10 @@ function ChatMock() {
           >
             <p
               className={cn(
-                "max-w-[90%] rounded-lg px-4 py-3 text-[13px] leading-relaxed sm:text-sm",
+                "max-w-[92%] px-3.5 py-3 text-[13px] leading-relaxed sm:max-w-[90%] sm:px-4 sm:text-sm",
                 message.role === "user"
-                  ? "bg-blue text-white"
-                  : "border border-color-border bg-color-bg-alt text-color-text",
+                  ? "border border-color-border-light bg-color-blue-tint text-color-text"
+                  : "border border-color-border bg-color-bg-alt text-color-text-muted",
               )}
             >
               {message.text}
@@ -44,7 +52,7 @@ function ChatMock() {
           </div>
         ))}
       </div>
-    </div>
+    </ModuleCard>
   );
 }
 
@@ -52,16 +60,16 @@ export function Copilot() {
   return (
     <section
       id="copilot"
-      className="w-full border-t border-color-border bg-color-bg py-16 md:py-24"
+      className="w-full overflow-x-clip border-t border-color-border bg-color-bg py-12 sm:py-16 md:py-24"
     >
       <div className="section-container">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
-          <Reveal delay={0.06} className="lg:order-2">
+        <div className="grid min-w-0 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+          <Reveal delay={0.06} className="min-w-0 lg:order-2">
             <ChatMock />
           </Reveal>
 
-          <Reveal className="lg:order-1">
-            <h2 className="font-heading text-3xl font-medium text-color-text md:text-5xl">
+          <Reveal className="min-w-0 lg:order-1">
+            <h2 className="font-heading text-[clamp(1.75rem,5vw,3rem)] font-medium text-color-text md:text-5xl">
               Your AI analyst that never{" "}
               <span className="text-blue">sleeps.</span>
             </h2>

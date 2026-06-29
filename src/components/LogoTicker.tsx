@@ -32,7 +32,7 @@ export function LogoTicker({ items, className, itemClassName }: LogoTickerProps)
                 alt={item.name}
                 width={120}
                 height={28}
-                className="h-6 w-auto opacity-70 transition-opacity hover:opacity-100 sm:h-7"
+                className="h-6 w-auto opacity-50 brightness-0 invert transition-opacity hover:opacity-80 sm:h-7"
                 loading="lazy"
                 decoding="async"
               />

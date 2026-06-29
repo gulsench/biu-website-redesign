@@ -15,20 +15,20 @@ export function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="w-full border-t border-color-border bg-color-surface py-16 md:py-24"
+      className="w-full overflow-x-clip border-t border-color-border bg-color-surface py-12 sm:py-16 md:py-24"
     >
       <div className="section-container">
-        <Reveal className="mb-12 md:mb-14">
-          <h2 className="font-heading text-3xl font-medium text-color-text md:text-5xl">
+        <Reveal className="mb-10 sm:mb-12 md:mb-14">
+          <h2 className="font-heading text-[clamp(1.75rem,5vw,3rem)] font-medium text-color-text md:text-5xl">
             More intelligence,{" "}
             <span className="text-blue">coming soon</span>.
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
           {items.map((item, idx) => (
             <Reveal key={item.name} delay={idx * 0.07} y={20}>
-              <article className="flex h-full flex-col rounded-lg border border-color-border bg-color-bg-alt p-8 md:p-10">
+              <article className="flex h-full min-w-0 flex-col rounded-lg border border-color-border bg-color-bg-alt p-6 sm:p-8 md:p-10">
                 <span className="inline-flex w-fit rounded-full border border-blue/25 bg-color-blue-tint px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-blue">
                   Coming soon
                 </span>

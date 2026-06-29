@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const productLinks = ["AEO", "Social Media", "Competition", "Reputation"];
 const resourceLinks = ["Customer Stories", "Blogs", "FAQs"];
@@ -13,28 +13,89 @@ const resourceHrefs: Record<string, string> = {
   FAQs: "#",
 };
 
+function MenuIcon({
+  open,
+  onClick,
+  className,
+}: {
+  open: boolean;
+  onClick: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "relative flex h-10 w-10 items-center justify-center lg:hidden",
+        className,
+      )}
+      aria-label={open ? "Close menu" : "Open menu"}
+      aria-expanded={open}
+    >
+      <span className="relative block h-3.5 w-5">
+        <span
+          className={cn(
+            "absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-current transition-all duration-200",
+            open && "top-1.5 rotate-45",
+          )}
+        />
+        <span
+          className={cn(
+            "absolute left-0 top-1.5 block h-0.5 w-5 rounded-full bg-current transition-all duration-200",
+            open && "opacity-0",
+          )}
+        />
+        <span
+          className={cn(
+            "absolute left-0 top-3 block h-0.5 w-5 rounded-full bg-current transition-all duration-200",
+            open && "top-1.5 -rotate-45",
+          )}
+        />
+      </span>
+    </button>
+  );
+}
+
 function NavDropdown({
   label,
   links,
   hrefFor,
+  onNavigate,
 }: {
   label: string;
   links: string[];
   hrefFor: (link: string) => string;
+  onNavigate?: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: MouseEvent) => {
+      if (!ref.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
 
   return (
     <div
+      ref={ref}
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button className="flex items-center gap-1 font-body text-sm font-medium text-color-text hover:text-color-text-muted transition-colors">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-color-text-muted transition-colors hover:text-color-text"
+      >
         {label}
         <ChevronDown
-          size={16}
-          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          size={14}
+          className={cn("transition-transform duration-200", open && "rotate-180")}
         />
       </button>
       <AnimatePresence>
@@ -43,15 +104,16 @@ function NavDropdown({
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 top-full z-[60] w-52 pt-2"
           >
-            <div className="bg-color-surface border border-color-border rounded-lg shadow-sm min-w-[180px] overflow-hidden py-1">
+            <div className="border border-white/10 bg-[#000000] p-1 shadow-lg backdrop-blur-none">
               {links.map((link) => (
                 <a
                   key={link}
                   href={hrefFor(link)}
-                  className="block px-4 py-2 text-sm font-medium text-color-text hover:bg-color-bg-alt transition-colors"
+                  onClick={onNavigate}
+                  className="block px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                 >
                   {link}
                 </a>
@@ -65,101 +127,94 @@ function NavDropdown({
 }
 
 export function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const closeMobile = () => setMobileOpen(false);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
-    <motion.nav
-      initial={{ y: -64, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-color-border bg-color-bg/95 backdrop-blur-sm"
-    >
-      <div className="mx-auto w-full max-w-[1232px] px-6 md:px-8 h-14 flex items-center justify-between">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-color-border bg-color-bg">
+      <nav className="section-container flex h-14 items-center justify-between gap-3 sm:h-16 sm:gap-4">
         <Link
           to="/"
-          className="flex-shrink-0 font-heading font-bold text-xl text-blue"
+          className="min-w-0 shrink truncate font-heading text-sm font-semibold tracking-tight text-color-text sm:text-base"
+          onClick={closeMobile}
         >
           Boast It UP
         </Link>
 
-        <div className="hidden lg:flex items-center gap-8">
-          <NavDropdown label="Products" links={productLinks} hrefFor={() => "#modules"} />
+        <div className="hidden items-center gap-1 lg:flex">
+          <NavDropdown
+            label="Products"
+            links={productLinks}
+            hrefFor={() => "#modules"}
+            onNavigate={closeMobile}
+          />
           <NavDropdown
             label="Resources"
             links={resourceLinks}
             hrefFor={(link) => resourceHrefs[link] ?? "#"}
+            onNavigate={closeMobile}
           />
           <a
             href="#"
-            className="font-body text-sm font-medium text-color-text hover:text-color-text-muted transition-colors"
+            className="px-3 py-2 text-sm font-medium text-color-text-muted transition-colors hover:text-color-text"
           >
             About us
           </a>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <ThemeToggle />
-          <div className="hidden lg:flex items-center gap-2">
-            <a
-              href="#"
-              className="px-5 py-2 border border-color-border bg-color-paper font-body text-sm font-medium text-color-text rounded hover:bg-color-bg-alt transition-colors"
-            >
-              Login
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center h-9 px-4 bg-blue text-white border border-blue rounded font-body text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              Book a demo
-            </a>
-          </div>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden flex items-center justify-center w-10 h-10 -mr-2 text-color-text"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+        <div className="flex items-center gap-3">
+          <a href="#" className="btn-secondary hidden !w-auto px-4 text-[13px] lg:inline-flex lg:h-9">
+            Book a demo
+          </a>
+          <MenuIcon
+            open={mobileOpen}
+            onClick={() => setMobileOpen((open) => !open)}
+            className="text-color-text lg:hidden"
+          />
         </div>
-      </div>
+      </nav>
 
-      <AnimatePresence>
-        {mobileMenuOpen && (
+      <AnimatePresence initial={false}>
+        {mobileOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden border-t border-color-border bg-color-surface overflow-hidden"
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-color-border lg:hidden"
           >
-            <div className="p-6 space-y-4">
+            <div className="section-container max-h-[calc(100dvh-3.5rem)] space-y-6 overflow-y-auto py-5 sm:max-h-[calc(100dvh-4rem)]">
               <div>
-                <p className="text-xs font-mono uppercase text-color-text-dim mb-3">
-                  Products
-                </p>
-                <div className="space-y-2">
+                <p className="eyebrow mb-3">Products</p>
+                <div className="space-y-1">
                   {productLinks.map((link) => (
                     <a
                       key={link}
                       href="#modules"
-                      className="block text-sm text-color-text hover:text-blue"
+                      onClick={closeMobile}
+                      className="block py-2 text-sm text-color-text-muted hover:text-color-text"
                     >
                       {link}
                     </a>
                   ))}
                 </div>
               </div>
-              <div className="pt-4 border-t border-color-border">
-                <p className="text-xs font-mono uppercase text-color-text-dim mb-3">
-                  Resources
-                </p>
-                <div className="space-y-2">
+              <div>
+                <p className="eyebrow mb-3">Resources</p>
+                <div className="space-y-1">
                   {resourceLinks.map((link) => (
                     <a
                       key={link}
                       href={resourceHrefs[link] ?? "#"}
-                      className="block text-sm text-color-text hover:text-blue"
+                      onClick={closeMobile}
+                      className="block py-2 text-sm text-color-text-muted hover:text-color-text"
                     >
                       {link}
                     </a>
@@ -168,32 +223,18 @@ export function Navbar() {
               </div>
               <a
                 href="#"
-                className="block text-sm font-medium text-color-text hover:text-blue"
+                onClick={closeMobile}
+                className="block py-2 text-sm text-color-text-muted hover:text-color-text"
               >
                 About us
               </a>
-              <div className="pt-4 border-t border-color-border space-y-2">
-                <a
-                  href="#"
-                  className="block text-sm font-medium text-color-text hover:text-blue"
-                >
-                  Login
-                </a>
-              </div>
-              <div className="flex items-center justify-between pt-4 border-t border-color-border">
-                <span className="text-sm font-medium text-color-text">Appearance</span>
-                <ThemeToggle />
-              </div>
-              <a
-                href="#"
-                className="block w-full text-center py-3 bg-blue text-white rounded-lg font-body text-sm font-medium hover:opacity-90 transition-opacity"
-              >
+              <a href="#" onClick={closeMobile} className="btn-secondary w-full justify-center">
                 Book a demo
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 }
