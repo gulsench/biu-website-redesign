@@ -8,7 +8,6 @@ import { ConnectStack } from "@/components/ConnectStack";
 import { Copilot } from "@/components/Copilot";
 import { Roadmap } from "@/components/Roadmap";
 import { CustomerStories } from "@/components/CustomerStories";
-import { HeroVideoBackground } from "@/components/HeroVideoBackground";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 
@@ -17,10 +16,8 @@ export default function Index() {
     <div className="min-h-screen overflow-x-clip bg-color-bg">
       <Navbar />
 
-      <section className="section-light relative w-full overflow-hidden border-b border-color-border pt-14 sm:pt-16">
-        <HeroVideoBackground />
-
-        <div className="relative z-10 section-container py-12 sm:py-16 md:py-24 lg:py-28">
+      <section className="section-light w-full border-b border-color-border pt-14 sm:pt-16">
+        <div className="section-container py-12 sm:py-16 md:py-24 lg:py-28">
           <div className="max-w-3xl min-w-0">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -37,10 +34,7 @@ export default function Index() {
               transition={{ duration: 0.55, delay: 0.06 }}
               className="font-heading text-[clamp(2rem,8vw,4.25rem)] font-medium leading-[1.05] tracking-[-0.04em] text-color-text"
             >
-              <span className="text-blue">Strong brands</span> don&apos;t happen. They&apos;re built.
-              <span className="block text-color-text-muted">
-                We build them.
-              </span>
+              Know exactly how your brand shows up.
             </motion.h1>
 
             <motion.p
@@ -49,8 +43,8 @@ export default function Index() {
               transition={{ duration: 0.55, delay: 0.12 }}
               className="mt-6 max-w-xl text-base leading-relaxed text-color-text-muted md:text-lg"
             >
-              Know where you show up in AI answers, and the one move that closes
-              the gap between you and category leaders.
+              Across AI, social, competitors, and reviews — then turn what you
+              find into your next move.
             </motion.p>
 
             <motion.div

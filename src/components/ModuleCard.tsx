@@ -19,7 +19,7 @@ export function ModuleCard({
         className,
       )}
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/[0.06] to-transparent dark:via-white/[0.08]" />
       <div className="relative p-4 sm:p-5">{children}</div>
     </div>
   );

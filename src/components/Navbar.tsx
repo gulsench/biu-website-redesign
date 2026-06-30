@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { moduleHref, moduleIdByLabel } from "@/lib/routes";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const productLinks = ["AEO", "Social Media", "Competition", "Reputation"];
 const resourceLinks = ["Customer Stories", "Blogs", "FAQs"];
@@ -108,13 +109,13 @@ function NavDropdown({
             transition={{ duration: 0.15 }}
             className="absolute left-0 top-full z-[60] w-52 pt-2"
           >
-            <div className="border border-white/10 bg-[#000000] p-1 shadow-lg backdrop-blur-none">
+            <div className="border border-color-border bg-color-surface p-1 shadow-lg">
               {links.map((link) => (
                 <Link
                   key={link}
                   to={hrefFor(link)}
                   onClick={onNavigate}
-                  className="block px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                  className="block px-3 py-2 text-sm text-color-text-muted transition-colors hover:bg-color-bg-alt hover:text-color-text"
                 >
                   {link}
                 </Link>
@@ -170,7 +171,8 @@ export function Navbar() {
           </a>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
           <a href="#" className="btn-secondary hidden !w-auto px-4 text-[13px] lg:inline-flex lg:h-9">
             Book a demo
           </a>
@@ -232,6 +234,9 @@ export function Navbar() {
               <a href="#" onClick={closeMobile} className="btn-secondary w-full justify-center">
                 Book a demo
               </a>
+              <div className="flex justify-center pt-2">
+                <ThemeToggle />
+              </div>
             </div>
           </motion.div>
         )}
