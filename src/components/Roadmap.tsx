@@ -15,7 +15,7 @@ export function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="w-full overflow-x-clip border-t border-color-border bg-color-surface py-12 sm:py-16 md:py-24"
+      className="section-light-alt w-full overflow-x-clip border-t border-color-border py-12 sm:py-16 md:py-24"
     >
       <div className="section-container">
         <Reveal className="mb-10 sm:mb-12 md:mb-14">

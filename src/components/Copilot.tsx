@@ -43,7 +43,7 @@ function ChatMock() {
               className={cn(
                 "max-w-[92%] px-3.5 py-3 text-[13px] leading-relaxed sm:max-w-[90%] sm:px-4 sm:text-sm",
                 message.role === "user"
-                  ? "border border-color-border-light bg-color-blue-tint text-color-text"
+                  ? "border border-blue/25 bg-blue/[0.08] text-color-text"
                   : "border border-color-border bg-color-bg-alt text-color-text-muted",
               )}
             >
@@ -60,7 +60,7 @@ export function Copilot() {
   return (
     <section
       id="copilot"
-      className="w-full overflow-x-clip border-t border-color-border bg-color-bg py-12 sm:py-16 md:py-24"
+      className="section-light-alt w-full overflow-x-clip border-t border-color-border py-12 sm:py-16 md:py-24"
     >
       <div className="section-container">
         <div className="grid min-w-0 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">

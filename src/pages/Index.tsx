@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
-import { FourModules } from "@/components/FourModules";
+import { PlatformOverview } from "@/components/PlatformOverview";
+import { IntelligenceBento } from "@/components/IntelligenceBento";
+import { PersonaEdge } from "@/components/PersonaEdge";
 import { ConnectStack } from "@/components/ConnectStack";
 import { Copilot } from "@/components/Copilot";
 import { Roadmap } from "@/components/Roadmap";
 import { CustomerStories } from "@/components/CustomerStories";
-import { InteractiveTickerLink } from "@/components/InteractiveTickerLink";
 import { HeroVideoBackground } from "@/components/HeroVideoBackground";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -16,7 +17,7 @@ export default function Index() {
     <div className="min-h-screen overflow-x-clip bg-color-bg">
       <Navbar />
 
-      <section className="relative w-full overflow-hidden border-b border-color-border pt-14 sm:pt-16">
+      <section className="section-light relative w-full overflow-hidden border-b border-color-border pt-14 sm:pt-16">
         <HeroVideoBackground />
 
         <div className="relative z-10 section-container py-12 sm:py-16 md:py-24 lg:py-28">
@@ -71,13 +72,13 @@ export default function Index() {
             </motion.div>
           </div>
         </div>
-
-        <div className="relative z-10">
-          <InteractiveTickerLink />
-        </div>
       </section>
 
-      <FourModules />
+      <PlatformOverview />
+
+      <IntelligenceBento />
+
+      <PersonaEdge />
 
       <ConnectStack />
 
@@ -87,7 +88,7 @@ export default function Index() {
 
       <Roadmap />
 
-      <section className="w-full border-t border-color-border bg-color-bg py-14 sm:py-20 md:py-28">
+      <section className="section-light w-full border-t border-color-border py-14 sm:py-20 md:py-28">
         <div className="section-container">
           <Reveal className="max-w-2xl min-w-0">
             <p className="eyebrow mb-4">Get started</p>

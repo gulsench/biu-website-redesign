@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { productModules } from "@/lib/modules";
+import { productModules, type ModuleId } from "@/lib/modules";
 import { ModuleMock } from "@/components/ModuleMock";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
 export function FourModules() {
+  const location = useLocation();
   const [activeModule, setActiveModule] = useState(0);
   const [activePillar, setActivePillar] = useState(0);
   const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const hash = location.hash.replace("#", "") as ModuleId;
+    if (!hash) return;
+    const index = productModules.findIndex((mod) => mod.id === hash);
+    if (index >= 0) {
+      setActiveModule(index);
+      setActivePillar(0);
+    }
+  }, [location.hash]);
 
   const module = productModules[activeModule];
   const pillar = module.pillars[activePillar];
@@ -18,10 +30,12 @@ export function FourModules() {
   function selectModule(index: number) {
     setActiveModule(index);
     setActivePillar(0);
+    const id = productModules[index].id;
+    window.history.replaceState(null, "", `${location.pathname}#${id}`);
   }
 
   return (
-    <section id="modules" className="w-full overflow-x-clip border-t border-color-border bg-color-surface py-12 sm:py-16 md:py-24">
+    <section id="modules" className="section-light w-full overflow-x-clip border-t border-color-border py-12 sm:py-16 md:py-24">
       <div className="section-container">
         <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-14 xl:gap-16">
           <div className="min-w-0">
@@ -90,7 +104,10 @@ export function FourModules() {
                     transition={{ duration: reduce ? 0 : 0.28, ease: [0.23, 1, 0.32, 1] }}
                     className="w-full min-w-0 max-w-md lg:max-w-lg"
                   >
-                    <ModuleMock pillarId={pillar.id} />
+                    <div className="relative">
+                      <div className="pointer-events-none absolute -inset-px bg-gradient-to-b from-blue/10 via-transparent to-transparent opacity-60" />
+                      <ModuleMock pillarId={pillar.id} />
+                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -102,10 +119,10 @@ export function FourModules() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
                   transition={{ duration: reduce ? 0 : 0.25, ease: [0.23, 1, 0.32, 1] }}
-                  className="mt-6 border border-color-border/80 bg-color-bg-alt/40 px-4 py-6 sm:mt-8 sm:px-6 sm:py-8 md:px-8 md:py-10"
+                  className="mt-6 border border-color-border bg-color-bg px-4 py-6 sm:mt-8 sm:px-6 sm:py-8 md:px-8 md:py-10"
                 >
-                  <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-blue sm:text-xs">
-                    {moduleNumber} · {module.label.toUpperCase()}
+                  <p className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-color-text-dim">
+                    {moduleNumber} · {module.label}
                   </p>
                   <h3 className="mt-2 font-heading text-2xl font-medium text-color-text sm:mt-3 sm:text-3xl md:text-4xl">
                     {pillar.label}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { moduleHref, moduleIdByLabel } from "@/lib/routes";
 
 const productLinks = ["AEO", "Social Media", "Competition", "Reputation"];
 const resourceLinks = ["Customer Stories", "Blogs", "FAQs"];
@@ -109,14 +110,14 @@ function NavDropdown({
           >
             <div className="border border-white/10 bg-[#000000] p-1 shadow-lg backdrop-blur-none">
               {links.map((link) => (
-                <a
+                <Link
                   key={link}
-                  href={hrefFor(link)}
+                  to={hrefFor(link)}
                   onClick={onNavigate}
                   className="block px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                 >
                   {link}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>
@@ -152,7 +153,7 @@ export function Navbar() {
           <NavDropdown
             label="Products"
             links={productLinks}
-            hrefFor={() => "#modules"}
+            hrefFor={(link) => moduleHref(moduleIdByLabel[link])}
             onNavigate={closeMobile}
           />
           <NavDropdown
@@ -195,14 +196,14 @@ export function Navbar() {
                 <p className="eyebrow mb-3">Products</p>
                 <div className="space-y-1">
                   {productLinks.map((link) => (
-                    <a
+                    <Link
                       key={link}
-                      href="#modules"
+                      to={moduleHref(moduleIdByLabel[link])}
                       onClick={closeMobile}
                       className="block py-2 text-sm text-color-text-muted hover:text-color-text"
                     >
                       {link}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

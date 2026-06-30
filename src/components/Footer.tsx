@@ -1,11 +1,13 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { moduleHref } from "@/lib/routes";
+import type { ModuleId } from "@/lib/modules";
 
-const productLinks = [
-  { label: "AEO", href: "#modules" },
-  { label: "Social Media", href: "#modules" },
-  { label: "Competition", href: "#modules" },
-  { label: "Reputation", href: "#modules" },
+const productLinks: { label: string; moduleId: ModuleId }[] = [
+  { label: "AEO", moduleId: "aeo" },
+  { label: "Social Media", moduleId: "social" },
+  { label: "Competition", moduleId: "competition" },
+  { label: "Reputation", moduleId: "reputation" },
 ];
 
 const resourceLinks = [
@@ -36,7 +38,7 @@ function FooterColumn({
 
 export function Footer() {
   return (
-    <footer className="w-full overflow-x-clip border-t border-color-border bg-color-bg">
+    <footer className="section-light w-full overflow-x-clip border-t border-color-border">
       <div className="section-container py-10 sm:py-14 md:py-20">
         <div className="grid gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.4fr)] lg:gap-16">
           <div className="min-w-0 max-w-md">
@@ -54,12 +56,12 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {productLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={moduleHref(link.moduleId)}
                       className="text-sm text-color-text-muted transition-colors hover:text-color-text"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

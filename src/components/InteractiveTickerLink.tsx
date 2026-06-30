@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { moduleHref, moduleIdByLabel } from "@/lib/routes";
 
 export interface TickerLinkItem {
   title: string;
@@ -7,10 +8,10 @@ export interface TickerLinkItem {
 }
 
 const defaultItems: TickerLinkItem[] = [
-  { title: "AEO", href: "#modules" },
-  { title: "Social Media", href: "#modules" },
-  { title: "Competition", href: "#modules" },
-  { title: "Reputation", href: "#modules" },
+  { title: "AEO", href: moduleHref(moduleIdByLabel.AEO) },
+  { title: "Social Media", href: moduleHref(moduleIdByLabel["Social Media"]) },
+  { title: "Competition", href: moduleHref(moduleIdByLabel.Competition) },
+  { title: "Reputation", href: moduleHref(moduleIdByLabel.Reputation) },
 ];
 
 /** Repeat items so each track is always wider than the viewport. */

@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import type { PillarId } from "@/lib/modules";
 import {
   ModuleCard,
@@ -7,17 +6,18 @@ import {
   ModuleCardFooter,
   ModuleCardHeader,
   ModuleCardSubtitle,
+  ModuleDonut,
   ModuleListItem,
   ModuleMetricGrid,
   ModuleProgressList,
+  ModuleRankRow,
+  ModuleSectionLabel,
+  ModuleSparkline,
   ModuleTableRow,
   moduleBadgeClass,
   moduleChipClass,
 } from "@/components/ModuleCard";
 import { cn } from "@/lib/utils";
-
-const CHART_TRACK = "var(--color-border)";
-const CHART_LINE = "var(--color-text-muted)";
 
 function SocialContentMock() {
   const formats = [
@@ -67,9 +67,7 @@ function SocialHashtagMock() {
       <ModuleCardDivider />
       <div className="space-y-4">
         <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-color-text-muted">
-            Working
-          </p>
+          <ModuleSectionLabel>Working</ModuleSectionLabel>
           <div className="space-y-2">
             {working.map((t) => (
               <div key={t.tag} className="flex items-center justify-between gap-2 text-[12px]">
@@ -79,10 +77,8 @@ function SocialHashtagMock() {
             ))}
           </div>
         </div>
-        <div className="border-t border-color-border/80 pt-4">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-color-text-muted">
-            Hurting reach
-          </p>
+        <div className="border-t border-color-border pt-4">
+          <ModuleSectionLabel>Hurting reach</ModuleSectionLabel>
           <div className="space-y-2">
             {hurting.map((t) => (
               <div key={t.tag} className="flex items-center justify-between gap-2 text-[12px]">
@@ -92,7 +88,7 @@ function SocialHashtagMock() {
             ))}
           </div>
         </div>
-        <div className="flex flex-wrap gap-1.5 border-t border-color-border/80 pt-4">
+        <div className="flex flex-wrap gap-1.5 border-t border-color-border pt-4">
           {opportunities.map((tag) => (
             <span key={tag} className={cn(moduleChipClass(false), "text-[10px]")}>
               {tag}
@@ -105,7 +101,6 @@ function SocialHashtagMock() {
 }
 
 function SocialCommentsMock() {
-  const reduce = useReducedMotion();
   const positive = 65;
   const neutral = 22;
   const negative = 13;
@@ -122,53 +117,24 @@ function SocialCommentsMock() {
       />
       <ModuleCardSubtitle>What your audience actually says about you</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="flex items-center gap-4">
-        <div className="relative h-16 w-16 shrink-0">
-          <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90">
-            <circle cx="32" cy="32" r="26" fill="none" stroke={CHART_TRACK} strokeWidth="8" />
-            <motion.circle
-              cx="32"
-              cy="32"
-              r="26"
-              fill="none"
-              stroke={CHART_LINE}
-              strokeWidth="8"
-              strokeLinecap="round"
-              strokeDasharray={2 * Math.PI * 26}
-              initial={{
-                strokeDashoffset: reduce
-                  ? 2 * Math.PI * 26 * (1 - positive / 100)
-                  : 2 * Math.PI * 26,
-              }}
-              whileInView={{ strokeDashoffset: 2 * Math.PI * 26 * (1 - positive / 100) }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: reduce ? 0 : 1 }}
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-sm font-bold text-color-text">{positive}%</span>
-            <span className="text-[8px] text-color-text-muted">positive</span>
-          </div>
-        </div>
-        <ul className="min-w-0 flex-1 space-y-1.5 text-[12px]">
+      <div className="flex items-center gap-5">
+        <ModuleDonut value={positive} sublabel="positive" label="Positive sentiment" />
+        <ul className="min-w-0 flex-1 space-y-2 text-[12px]">
           {[
             ["Positive", `${positive}%`, "text-color-text"],
             ["Neutral", `${neutral}%`, "text-color-text-muted"],
-            ["Negative", `${negative}%`, "text-color-text-muted"],
+            ["Negative", `${negative}%`, "text-color-text-dim"],
           ].map(([k, v, color]) => (
             <li key={k} className="flex justify-between gap-2">
               <span className="text-color-text-muted">{k}</span>
-              <span className={cn("font-semibold", color)}>{v}</span>
+              <span className={cn("font-mono font-semibold tabular-nums", color)}>{v}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div className="mt-4 flex flex-wrap gap-1.5 border-t border-color-border/80 pt-4">
+      <div className="mt-4 flex flex-wrap gap-1.5 border-t border-color-border pt-4">
         {themes.map((theme) => (
-          <span
-            key={theme}
-            className="rounded-md border border-color-border bg-color-bg-alt px-2 py-0.5 text-[10px] text-color-text"
-          >
+          <span key={theme} className={moduleChipClass(false)}>
             {theme}
           </span>
         ))}
@@ -178,15 +144,7 @@ function SocialCommentsMock() {
 }
 
 function SocialEngagementMock() {
-  const reduce = useReducedMotion();
   const pts = [28, 32, 30, 36, 38, 42, 46, 50];
-  const w = 240;
-  const h = 56;
-  const max = 52;
-  const step = w / (pts.length - 1);
-  const path = pts
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${i * step} ${h - (p / max) * h}`)
-    .join("");
 
   return (
     <ModuleCard>
@@ -198,31 +156,17 @@ function SocialEngagementMock() {
       />
       <ModuleCardSubtitle>The one metric that predicts your growth</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-color-text-muted">
-        8-week trend
-      </p>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full overflow-hidden">
-        <motion.path
-          d={path}
-          fill="none"
-          stroke={CHART_LINE}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: reduce ? 1 : 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: reduce ? 0 : 1, ease: "easeInOut" }}
-        />
-      </svg>
-      <ModuleMetricGrid
+      <ModuleSparkline points={pts} label="8-week trend" accent />
+      <div className="mt-4">
+        <ModuleMetricGrid
         items={[
           ["Likes", "62%"],
           ["Comments", "19%"],
           ["Shares", "11%"],
           ["Saves", "8%"],
         ]}
-      />
+        />
+      </div>
       <ModuleCardFooter>2.3× industry average ↑</ModuleCardFooter>
     </ModuleCard>
   );
@@ -271,12 +215,12 @@ function AeoGapsMock() {
       />
       <ModuleCardSubtitle>Queries rivals win. You&apos;re completely invisible.</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="mb-2 grid grid-cols-[minmax(0,1fr)_24px_48px] gap-1.5 text-[9px] font-semibold uppercase tracking-wide text-color-text-muted sm:grid-cols-[1fr_28px_52px] sm:gap-2">
+      <div className="mb-2 grid grid-cols-[minmax(0,1fr)_24px_52px] gap-2 font-mono text-[9px] uppercase tracking-[0.08em] text-color-text-dim sm:grid-cols-[1fr_28px_56px]">
         <span>Topic</span>
         <span className="text-center">You</span>
         <span className="text-right">Opp.</span>
       </div>
-      <div className="divide-y divide-color-border/80">
+      <div className="divide-y divide-color-border">
         {gaps.map((gap) => (
           <ModuleTableRow
             key={gap.topic}
@@ -312,7 +256,7 @@ function AeoAlertsMock() {
       />
       <ModuleCardSubtitle>What changed in AI answers you don&apos;t know about yet</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="divide-y divide-color-border/80">
+      <div className="divide-y divide-color-border">
         {alerts.map((alert) => (
           <ModuleListItem
             key={alert.title}
@@ -346,34 +290,22 @@ function AeoScoreMock() {
       />
       <ModuleCardSubtitle>Your score vs rivals — the one number that settles it</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="mb-4 flex flex-wrap gap-1.5">
-        {engines.map((e) => (
-          <span key={e} className={moduleChipClass(false)}>
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        {engines.map((e, i) => (
+          <span key={e} className={moduleChipClass(i === 0)}>
             {e}
           </span>
         ))}
       </div>
-      <div className="divide-y divide-color-border/80">
+      <div className="space-y-0.5">
         {rivals.map((r) => (
-          <div
+          <ModuleRankRow
             key={r.name}
-            className="flex items-center justify-between gap-2 py-3 text-[13px] first:pt-0 last:pb-0"
-          >
-            <span className={cn("font-semibold", r.highlight ? "text-color-text" : "text-color-text-muted")}>
-              {r.name}
-            </span>
-            <div className="flex items-center gap-2">
-              <span
-                className={cn(
-                  "font-mono font-bold",
-                  r.highlight ? "text-color-text" : "text-color-text-muted",
-                )}
-              >
-                {r.score}
-              </span>
-              <span className="text-[11px] text-color-text-muted">{r.rank}</span>
-            </div>
-          </div>
+            name={r.name}
+            score={r.score}
+            rank={r.rank}
+            highlight={r.highlight}
+          />
         ))}
       </div>
     </ModuleCard>
@@ -423,12 +355,12 @@ function CompGapsMock() {
       />
       <ModuleCardSubtitle>Topics rivals rank for. You&apos;re completely invisible.</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="mb-2 grid grid-cols-[minmax(0,1fr)_24px_48px] gap-1.5 text-[9px] font-semibold uppercase tracking-wide text-color-text-muted sm:grid-cols-[1fr_28px_52px] sm:gap-2">
+      <div className="mb-2 grid grid-cols-[minmax(0,1fr)_24px_52px] gap-2 font-mono text-[9px] uppercase tracking-[0.08em] text-color-text-dim sm:grid-cols-[1fr_28px_56px]">
         <span>Topic</span>
         <span className="text-center">You</span>
         <span className="text-right">Opp.</span>
       </div>
-      <div className="divide-y divide-color-border/80">
+      <div className="divide-y divide-color-border">
         {gaps.map((gap) => (
           <ModuleTableRow
             key={gap.topic}
@@ -464,7 +396,7 @@ function CompMovesMock() {
       />
       <ModuleCardSubtitle>What rivals did this week you don&apos;t know about yet</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="divide-y divide-color-border/80">
+      <div className="divide-y divide-color-border">
         {moves.map((move) => (
           <ModuleListItem
             key={move.title}
@@ -498,34 +430,22 @@ function CompBenchmarkMock() {
       />
       <ModuleCardSubtitle>Your score vs rivals — the one number that settles it</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="mb-4 flex flex-wrap gap-1.5">
-        {modules.map((m) => (
-          <span key={m} className={moduleChipClass(false)}>
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        {modules.map((m, i) => (
+          <span key={m} className={moduleChipClass(i === 0)}>
             {m}
           </span>
         ))}
       </div>
-      <div className="divide-y divide-color-border/80">
+      <div className="space-y-0.5">
         {rivals.map((r) => (
-          <div
+          <ModuleRankRow
             key={r.name}
-            className="flex items-center justify-between gap-2 py-3 text-[13px] first:pt-0 last:pb-0"
-          >
-            <span className={cn("font-semibold", r.highlight ? "text-color-text" : "text-color-text-muted")}>
-              {r.name}
-            </span>
-            <div className="flex items-center gap-2">
-              <span
-                className={cn(
-                  "font-mono font-bold",
-                  r.highlight ? "text-color-text" : "text-color-text-muted",
-                )}
-              >
-                {r.score}
-              </span>
-              <span className="text-[11px] text-color-text-muted">{r.rank}</span>
-            </div>
-          </div>
+            name={r.name}
+            score={r.score}
+            rank={r.rank}
+            highlight={r.highlight}
+          />
         ))}
       </div>
     </ModuleCard>
@@ -533,15 +453,7 @@ function CompBenchmarkMock() {
 }
 
 function RepAwarenessMock() {
-  const reduce = useReducedMotion();
   const pts = [42, 44, 46, 48, 50, 52, 55, 58];
-  const w = 240;
-  const h = 48;
-  const max = 60;
-  const step = w / (pts.length - 1);
-  const path = pts
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${i * step} ${h - (p / max) * h}`)
-    .join("");
 
   return (
     <ModuleCard>
@@ -559,30 +471,15 @@ function RepAwarenessMock() {
           ["Category share", "14%"],
         ]}
       />
-      <p className="mb-2 mt-4 text-[10px] font-semibold uppercase tracking-wide text-color-text-muted">
-        Mention trend
-      </p>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full overflow-hidden">
-        <motion.path
-          d={path}
-          fill="none"
-          stroke={CHART_LINE}
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: reduce ? 1 : 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: reduce ? 0 : 1 }}
-        />
-      </svg>
+      <div className="mt-4">
+        <ModuleSparkline points={pts} label="Mention trend" accent />
+      </div>
     </ModuleCard>
   );
 }
 
 function RepTrustMock() {
-  const reduce = useReducedMotion();
   const score = 58;
-  const circumference = 2 * Math.PI * 26;
   const sources = [
     { name: "G2", status: "Below cadence" },
     { name: "Trustpilot", status: "On track" },
@@ -599,39 +496,15 @@ function RepTrustMock() {
       />
       <ModuleCardSubtitle>Review velocity and sentiment that move your Reputation Signal</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <div className="flex items-center gap-4">
-        <div className="relative h-16 w-16 shrink-0">
-          <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90">
-            <circle cx="32" cy="32" r="26" fill="none" stroke={CHART_TRACK} strokeWidth="8" />
-            <motion.circle
-              cx="32"
-              cy="32"
-              r="26"
-              fill="none"
-              stroke={CHART_LINE}
-              strokeWidth="8"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              initial={{
-                strokeDashoffset: reduce
-                  ? circumference * (1 - score / 100)
-                  : circumference,
-              }}
-              whileInView={{ strokeDashoffset: circumference * (1 - score / 100) }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: reduce ? 0 : 1 }}
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-sm font-bold text-color-text">{score}</span>
-            <span className="text-[8px] text-color-text-muted">/100</span>
-          </div>
-        </div>
-        <ul className="min-w-0 flex-1 space-y-1.5 text-[12px]">
+      <div className="flex items-center gap-5">
+        <ModuleDonut value={score} sublabel="/100" label="Trust score" />
+        <ul className="min-w-0 flex-1 space-y-2 text-[12px]">
           {sources.map((s) => (
-            <li key={s.name} className="flex justify-between gap-2">
+            <li key={s.name} className="flex justify-between gap-2 border-b border-color-border pb-2 last:border-b-0 last:pb-0">
               <span className="text-color-text-muted">{s.name}</span>
-              <span className="truncate font-medium text-color-text">{s.status}</span>
+              <span className="truncate font-mono text-[11px] font-medium text-color-text">
+                {s.status}
+              </span>
             </li>
           ))}
         </ul>
@@ -660,12 +533,9 @@ function RepConsiderationMock() {
           { label: "Category avg", pct: 48 },
         ]}
       />
-      <div className="mt-2 flex flex-wrap gap-1.5 border-t border-color-border/80 pt-4">
+      <div className="mt-3 flex flex-wrap gap-1.5 border-t border-color-border pt-4">
         {themes.map((theme) => (
-          <span
-            key={theme}
-            className="rounded-md border border-color-border bg-color-bg-alt px-2 py-0.5 text-[10px] text-color-text"
-          >
+          <span key={theme} className={moduleChipClass(false)}>
             {theme}
           </span>
         ))}
@@ -691,10 +561,8 @@ function RepChoiceMock() {
       />
       <ModuleCardSubtitle>Why buyers pick you — or pass you over</ModuleCardSubtitle>
       <ModuleCardDivider />
-      <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-color-text-muted">
-        Top choice drivers
-      </p>
-      <div className="divide-y divide-color-border/80">
+      <ModuleSectionLabel>Top choice drivers</ModuleSectionLabel>
+      <div className="divide-y divide-color-border">
         {drivers.map((d) => (
           <div
             key={d.label}

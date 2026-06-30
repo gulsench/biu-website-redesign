@@ -16,30 +16,11 @@ const stackIntegrations: LogoTickerItem[] = [
   { type: "text", label: "Klaviyo" },
 ];
 
-const stackGroups = [
-  {
-    label: "Commerce",
-    items: ["Shopify", "Amazon"],
-  },
-  {
-    label: "Discovery",
-    items: ["Google", "Meta", "Semrush"],
-  },
-  {
-    label: "Social & comms",
-    items: ["Instagram", "YouTube", "TikTok", "Slack"],
-  },
-  {
-    label: "Retention",
-    items: ["HubSpot", "Klaviyo", "Trustpilot"],
-  },
-];
-
 export function ConnectStack() {
   return (
     <section
       id="integrations"
-      className="w-full overflow-x-clip border-t border-color-border bg-color-surface py-12 sm:py-16 md:py-24"
+      className="section-light w-full overflow-x-clip border-t border-color-border py-12 sm:py-16 md:py-24"
     >
       <div className="section-container">
         <Reveal className="mb-10 text-center md:mb-14">
@@ -58,30 +39,6 @@ export function ConnectStack() {
       <Reveal delay={0.06} className="mt-2 w-full">
         <LogoTicker items={stackIntegrations} />
       </Reveal>
-
-      <div className="section-container">
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 sm:gap-4">
-          {stackGroups.map((group, index) => (
-            <Reveal key={group.label} delay={0.08 + index * 0.04} y={12}>
-              <div className="h-full border border-color-border bg-color-bg-alt px-4 py-4 sm:px-5 sm:py-5">
-                <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-color-text-dim">
-                  {group.label}
-                </p>
-                <ul className="mt-3 space-y-1.5">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-[13px] font-medium text-color-text-muted"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
